@@ -59,8 +59,8 @@ module.exports = {
       {
         js: 'never',
         jsx: 'never',
-        js: 'never',
-        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
       },
     ],
     'import/no-extraneous-dependencies': [
@@ -85,11 +85,11 @@ module.exports = {
     {
       files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
       parserOptions: {
-        project: ['./web/app/tsconfig.json'],
+        project: ['./tsconfig.json'],
       },
     },
   ],
-  ignorePatterns: ['yarn.lock'],
+  ignorePatterns: ['yarn.lock', '.eslintrc.js'],
   settings: {
     'import/resolver': {
       node: {
