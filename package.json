@@ -13,29 +13,15 @@
   },
   "dependencies": {},
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --verbose",
-    "test:coverage": "react-scripts test --verbose --coverage --watchAll=false",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "start": "lerna run start --stream --parallel",
+    "start:watch": "lerna run start:watch --stream --parallel",
+    "build": "tsc -b lib/* services/* web/*",
+    "build:watch": "yarn build --watch",
+    "build:clean": "yarn clean && yarn build",
+    "web": "cd web/app && yarn dev",
+    "web:bundle": "cd web/app && yarn bundle",
+    "test": "jest --passWithNoTests --testTimeout 15000",
+    "lint": "lerna --stream lint"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.13.0",
