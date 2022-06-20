@@ -26,3 +26,6 @@ yarn-error.log*
 # build artifacts
 *.tsbuildinfo
 .eslintcache
+
+dist/
+dist-types/
