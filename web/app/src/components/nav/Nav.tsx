@@ -54,7 +54,7 @@ const Sidebar = () => {
               <NavItem
                 key={path}
                 active={currentRoute === path}
-                hoverColor={theme.colors.pink}>
+                hoverColor={theme.colors.red}>
                 <Link to={path}>
                   <Icon icon={icon} />
                 </Link>

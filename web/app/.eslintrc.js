@@ -14,7 +14,7 @@ module.exports = {
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: './tsconfig.json',
+    project: './tsconfig',
     ecmaFeatures: {
       jsx: true,
       tsx: true,
@@ -37,21 +37,10 @@ module.exports = {
     'no-return-assign': ['error', 'except-parens'],
     'lines-between-class-members': 0,
     'import/prefer-default-export': 0,
-    'react/jsx-closing-bracket-location': 0,
-    'react/jsx-props-no-spreading': 0,
-    'react/jsx-curly-newline': 0,
-    'react/jsx-curly-brace-presence': 0,
-    'react/no-array-index-key': 1,
-    'react/jsx-one-expression-per-line': 0,
-    'react/jsx-wrap-multilines': 0,
-    'react/jsx-indent': 0,
     '@typescript-eslint/no-for-in-array': ['error'],
     'no-unused-vars': ['warn', { args: 'none' }],
     'no-useless-constructor': 0,
     'no-empty-function': 0,
-    'react/prop-types': 0,
-    'react/require-default-props': 0,
-    'react/jsx-filename-extension': [1, { extensions: ['.jsx', 'tsx'] }],
     'no-unused-expressions': 'off',
     '@typescript-eslint/no-unused-expressions': ['error'],
     '@typescript-eslint/no-unsafe-argument': ['warn'],
@@ -65,20 +54,43 @@ module.exports = {
     '@typescript-eslint/no-unsafe-assignment': 'warn',
     '@typescript-eslint/no-unsafe-call': 'warn',
     '@typescript-eslint/no-unsafe-return': 'warn',
+    'import/extensions': [
+      'error',
+      {
+        js: 'never',
+        jsx: 'never',
+        js: 'never',
+        jsx: 'never',
+      },
+    ],
     'import/no-extraneous-dependencies': [
       'error',
       {
         devDependencies: true,
       },
     ],
+    'react/prop-types': 0,
+    'react/require-default-props': 0,
+    'react/jsx-filename-extension': [1, { extensions: ['.jsx', 'tsx'] }],
+    'react/jsx-closing-bracket-location': 0,
+    'react/jsx-props-no-spreading': 0,
+    'react/jsx-curly-newline': 0,
+    'react/jsx-curly-brace-presence': 0,
+    'react/no-array-index-key': 1,
+    'react/jsx-one-expression-per-line': 0,
+    'react/jsx-wrap-multilines': 0,
+    'react/jsx-indent': 0,
   },
-  settings: {
-    'import/resolver': {
-      alias: {
-        map: [['~', './src']],
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+  overrides: [
+    {
+      files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
+      parserOptions: {
+        project: ['./web/app/tsconfig.json'],
       },
     },
+  ],
+  ignorePatterns: ['yarn.lock'],
+  settings: {
     'import/resolver': {
       node: {
         moduleDirectory: ['node_modules', 'src/'],
@@ -88,13 +100,4 @@ module.exports = {
       version: 'detect',
     },
   },
-  ignorePatterns: ['yarn.lock'],
-  overrides: [
-    {
-      files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
-      parserOptions: {
-        project: ['./tsconfig.json'],
-      },
-    },
-  ],
 };

@@ -905,10 +905,6 @@ export const gradients: UIGradient[] = [
     colors: ['#43C6AC', '#191654'],
   },
   {
-    name: 'Can You Feel The Love Tonight',
-    colors: ['#4568DC', '#B06AB3'],
-  },
-  {
     name: 'Very Blue',
     colors: ['#0575E6', '#021B79'],
   },
@@ -973,10 +969,6 @@ export const gradients: UIGradient[] = [
     colors: ['#56CCF2', '#2F80ED'],
   },
   {
-    name: 'Chitty Chitty Bang Bang',
-    colors: ['#007991', '#78ffd6'],
-  },
-  {
     name: 'Visions of Grandeur',
     colors: ['#000046', '#1CB5E0'],
   },
@@ -1023,10 +1015,6 @@ export const gradients: UIGradient[] = [
   {
     name: 'Subu',
     colors: ['#0cebeb', '#20e3b2', '#29ffc6'],
-  },
-  {
-    name: 'Kimoby Is The New Blue',
-    colors: ['#396afc', '#2948ff'],
   },
   {
     name: 'Dull',

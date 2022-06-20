@@ -1,24 +1,22 @@
 {
   "compilerOptions": {
-    "rootDir": "./src",
-    "outDir": "./dist",
-    "lib": ["esnext", "dom"],
-    "target": "esnext",
-    "module": "esnext",
-    "jsx": "react-jsx",
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
-    "skipLibCheck": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "allowJs": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
+    "declaration": true,
+    "sourceMap": true,
+    "module": "commonjs",
     "moduleResolution": "node",
-    "isolatedModules": true,
-    "noEmit": true
+    "lib": ["esnext"],
+    "target": "es2017",
+    "strict": true,
+    "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "preserveConstEnums": true,
+    "esModuleInterop": false,
+    "jsx": "preserve",
+    "skipLibCheck": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "watchOptions": {
+    "excludeFiles": ["**/*.test.ts", "**.*spec.ts"]
+  }
 }
