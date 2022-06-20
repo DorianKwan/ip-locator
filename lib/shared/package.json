@@ -1,0 +1,17 @@
+{
+  "name": "ip-locator-shared",
+  "version": "0.1.0",
+  "description": "Shared code between all modules",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "build:watch": "yarn build --watch",
+    "build:clean": "yarn clead && yarn build",
+    "clean": "rm -rf dist tsconfig.tsbuildinfo",
+    "lint": "eslint --ext .ts src"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
