@@ -20,8 +20,8 @@
     "build:clean": "yarn clean && yarn build",
     "web": "cd web/app && yarn dev",
     "web:bundle": "cd web/app && yarn bundle",
-    "test": "jest --passWithNoTests --testTimeout 15000",
-    "lint": "lerna --stream lint"
+    "test": "lerna run --stream test",
+    "lint": "lerna run --stream lint"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.13.0",
