@@ -1,7 +1,7 @@
 import Koa from 'koa';
 import cors from '@koa/cors';
 import { Router, propagateErrors, propagateValues, err } from '@lcdev/router';
-import Geo2Lite from './routes/geo2lite';
+import GeoIP2Lite from './routes/geoip2lite';
 import { createServer, createLogger, getLogger, loadConfig } from './utils';
 
 const main = async () => {
@@ -17,7 +17,7 @@ const main = async () => {
 
   const router = new Router({ prefix: '/api' });
 
-  router.use('/geo2lite', Geo2Lite(apiKey, apiAccountId));
+  router.use('/geoip2lite', GeoIP2Lite(apiKey, apiAccountId));
 
   server
     .use(router.routes())

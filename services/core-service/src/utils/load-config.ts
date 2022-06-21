@@ -9,21 +9,21 @@ export const loadConfig = () => {
   const {
     NODE_ENV,
     WEB_SERVER_PORT = 9001,
-    GEO2LITE_API_KEY: apiKey,
-    GEO2LITE_API_ACCOUNT_ID: apiAccountId,
+    GEOIP2LITE_API_KEY: apiKey,
+    GEOIP2LITE_API_ACCOUNT_ID: apiAccountId,
     REACT_APP_URL: reactAppUrl,
   } = process.env;
 
   if (!apiKey) {
     throw new ConfigError({
-      message: 'No Geo2Lite api key was found.',
+      message: 'No Geoip2Lite api key was found.',
       data: { apiKey },
     });
   }
 
   if (!apiAccountId) {
     throw new ConfigError({
-      message: 'No Geo2Lite api accont id was found.',
+      message: 'No Geoip2Lite api accont id was found.',
       data: { apiAccountId },
     });
   }
