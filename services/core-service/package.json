@@ -1,0 +1,36 @@
+{
+  "name": "ip-locator-core-service",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "start": "node ./dist/index.js",
+    "start:watch": "node-dev ./dist/index.js",
+    "build": "tsc -b",
+    "build:watch": "yarn build --watch",
+    "build:clean": "yarn clead && yarn build",
+    "clean": "rm -rf dist tsconfig.tsbuildinfo",
+    "lint": "eslint --ext .ts src",
+    "test": "jest --passWithNoTests --testTimeout 150"
+  },
+  "dependencies": {
+    "@koa/cors": "^3.3.0",
+    "@lcdev/router": "^1.5.0",
+    "dotenv": "^16.0.1",
+    "ip-locator-shared": "*",
+    "koa": "^2.13.4",
+    "path": "^0.12.7",
+    "winston": "^3.7.2"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.13.4",
+    "@types/koa__cors": "^3.3.0",
+    "eslint": "^7.11.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^16.1.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "node-dev": "^7.4.3"
+  }
+}
