@@ -13,7 +13,7 @@ const main = async () => {
 
   server.use(cors({ origin: reactAppUrl, allowHeaders: ['GET'] }));
   server.use(propagateErrors(!isProduction));
-  server.use(propagateValues);
+  server.use(propagateValues());
 
   const router = new Router({ prefix: '/api' });
 
