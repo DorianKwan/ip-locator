@@ -17,6 +17,7 @@
   "dependencies": {
     "@koa/cors": "^3.3.0",
     "@lcdev/router": "^1.5.0",
+    "@maxmind/geoip2-node": "^3.4.0",
     "dotenv": "^16.0.1",
     "ip-locator-shared": "*",
     "koa": "^2.13.4",
