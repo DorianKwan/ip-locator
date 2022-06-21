@@ -15,9 +15,11 @@
   "scripts": {
     "start": "lerna run start --stream --parallel",
     "start:watch": "lerna run start:watch --stream --parallel",
+    "prebuild": "cd services/core-service && yarn build",
     "build": "tsc -b lib/* services/* web/*",
     "build:watch": "yarn build --watch",
     "build:clean": "yarn clean && yarn build",
+    "clean": "rm -rf tsconfig.tsbuildinfo && lerna run clean --stream",
     "web": "cd web/app && yarn dev",
     "web:bundle": "cd web/app && yarn bundle",
     "test": "lerna run --stream test",

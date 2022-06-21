@@ -12,7 +12,10 @@
     "build:clean": "yarn clead && yarn build",
     "clean": "rm -rf dist tsconfig.tsbuildinfo",
     "lint": "eslint --ext .ts src",
-    "test": "jest --passWithNoTests --testTimeout 150"
+    "test": "jest --passWithNoTests --testTimeout 150",
+    "//postbuild-comment": "tsc does not copy over files that aren't .js .ts or .json",
+    "//continued-comment": "See https://stackoverflow.com/questions/65435921/tsconfig-to-copy-sql-file-to-dist#answer-65436073",
+    "postbuild": "rsync -avum --include='*.mmdb' --include='./src/assests' --exclude='.gitkeep' './src/assets' './dist'"
   },
   "dependencies": {
     "@koa/cors": "^3.3.0",
