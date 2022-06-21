@@ -1,6 +1,6 @@
-import Service, { Geo2LiteServiceError } from './service';
+import Service, { GeoIp2LiteServiceError } from './service';
 
-describe('Geo2Lite Service', () => {
+describe('GeoIp2Lite Service', () => {
   it('returns proper address details', async () => {
     const mockedCity = 'Everywhere, no where..';
     const mockedCountry = 'There are no countries here';
@@ -55,7 +55,7 @@ describe('Geo2Lite Service', () => {
     try {
       await service.findAddressByIp('0.0.0.0');
     } catch (error: any) {
-      expect(error.type).toBe(Geo2LiteServiceError.NoCityFound);
+      expect(error.type).toBe(GeoIp2LiteServiceError.NoCityFound);
     }
   });
 
@@ -83,7 +83,7 @@ describe('Geo2Lite Service', () => {
     try {
       await service.findAddressByIp('0.0.0.0');
     } catch (error: any) {
-      expect(error.type).toBe(Geo2LiteServiceError.NoCountryFound);
+      expect(error.type).toBe(GeoIp2LiteServiceError.NoCountryFound);
     }
   });
 
@@ -111,7 +111,7 @@ describe('Geo2Lite Service', () => {
     try {
       await service.findAddressByIp('0.0.0.0');
     } catch (error: any) {
-      expect(error.type).toBe(Geo2LiteServiceError.NoPostalFound);
+      expect(error.type).toBe(GeoIp2LiteServiceError.NoPostalFound);
     }
   });
 
@@ -135,7 +135,7 @@ describe('Geo2Lite Service', () => {
     try {
       await service.findAddressByIp('0.0.0.0');
     } catch (error: any) {
-      expect(error.type).toBe(Geo2LiteServiceError.NoLocationFound);
+      expect(error.type).toBe(GeoIp2LiteServiceError.NoLocationFound);
     }
   });
 
@@ -163,7 +163,7 @@ describe('Geo2Lite Service', () => {
     try {
       await service.findAddressByIp('0.0.0.0');
     } catch (error: any) {
-      expect(error.type).toBe(Geo2LiteServiceError.NoTimeZoneFound);
+      expect(error.type).toBe(GeoIp2LiteServiceError.NoTimeZoneFound);
     }
   });
 });

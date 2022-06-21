@@ -1,6 +1,6 @@
 import { WebServiceClient } from '@maxmind/geoip2-node';
 
-export default class Geo2LiteRepo {
+export default class GeoIp2LiteRepo {
   private readonly apiClient: WebServiceClient;
 
   constructor(
