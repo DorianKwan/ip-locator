@@ -1,11 +1,25 @@
-import { getLogger } from '../../utils';
+import { WebServiceClient } from '@maxmind/geoip2-node';
 
 export default class Geo2LiteRepo {
-  constructor(private readonly apiKey: string) {}
+  private readonly apiClient: WebServiceClient;
 
-  async findAddressByIp(ip: string) {
-    const logger = getLogger();
-    (logger || console).info(ip);
-    return 'street address';
+  constructor(
+    private readonly apiKey: string,
+    private readonly apiAccountId: string,
+  ) {
+    this.apiClient = new WebServiceClient(apiAccountId, apiKey);
+  }
+
+  async getAddressByIp(ip: string) {
+    const { city, country, postal, location } = await this.apiClient.city(ip);
+
+    const addressDetails = {
+      city,
+      country,
+      postal,
+      location,
+    };
+
+    return addressDetails;
   }
 }
