@@ -10,9 +10,9 @@ describe('GeoIp2Lite Service', () => {
 
     const repo = {
       getAddressByIp: jest.fn().mockResolvedValueOnce({
-        city: mockedCity,
-        country: mockedCountry,
-        postal: mockedPostal,
+        city: { names: { en: mockedCity } },
+        country: { names: { en: mockedCountry } },
+        postal: { code: mockedPostal },
         location: {
           accuracyRadius: mockedAccuracyRadius,
           timeZone: mockedTimeZone,
@@ -39,8 +39,8 @@ describe('GeoIp2Lite Service', () => {
 
     const repo = {
       getAddressByIp: jest.fn().mockResolvedValueOnce({
-        country: mockedCountry,
-        postal: mockedPostal,
+        country: { names: { en: mockedCountry } },
+        postal: { code: mockedPostal },
         location: {
           accuracyRadius: mockedAccuracyRadius,
           timeZone: mockedTimeZone,
@@ -67,8 +67,8 @@ describe('GeoIp2Lite Service', () => {
 
     const repo = {
       getAddressByIp: jest.fn().mockResolvedValueOnce({
-        city: mockedCity,
-        postal: mockedPostal,
+        city: { names: { en: mockedCity } },
+        postal: { code: mockedPostal },
         location: {
           accuracyRadius: mockedAccuracyRadius,
           timeZone: mockedTimeZone,
@@ -95,8 +95,8 @@ describe('GeoIp2Lite Service', () => {
 
     const repo = {
       getAddressByIp: jest.fn().mockResolvedValueOnce({
-        city: mockedCity,
-        country: mockedCountry,
+        city: { names: { en: mockedCity } },
+        country: { names: { en: mockedCountry } },
         location: {
           accuracyRadius: mockedAccuracyRadius,
           timeZone: mockedTimeZone,
@@ -122,9 +122,9 @@ describe('GeoIp2Lite Service', () => {
 
     const repo = {
       getAddressByIp: jest.fn().mockResolvedValueOnce({
-        city: mockedCity,
-        country: mockedCountry,
-        postal: mockedPostal,
+        city: { names: { en: mockedCity } },
+        country: { names: { en: mockedCountry } },
+        postal: { code: mockedPostal },
       }),
     };
 
@@ -147,9 +147,9 @@ describe('GeoIp2Lite Service', () => {
 
     const repo = {
       getAddressByIp: jest.fn().mockResolvedValueOnce({
-        city: mockedCity,
-        country: mockedCountry,
-        postal: mockedPostal,
+        city: { names: { en: mockedCity } },
+        country: { names: { en: mockedCountry } },
+        postal: { code: mockedPostal },
         location: {
           accuracyRadius: mockedAccuracyRadius,
         },

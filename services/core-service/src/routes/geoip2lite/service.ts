@@ -21,6 +21,8 @@ export default class GeoIp2LiteService {
       });
     }
 
+    const cityName = city.names.en;
+
     if (!country) {
       throw new ServiceError({
         type: GeoIp2LiteServiceError.NoCountryFound,
@@ -29,6 +31,8 @@ export default class GeoIp2LiteService {
       });
     }
 
+    const countryName = country.names.en;
+
     if (!postal) {
       throw new ServiceError({
         type: GeoIp2LiteServiceError.NoPostalFound,
@@ -36,6 +40,8 @@ export default class GeoIp2LiteService {
         data: errorData,
       });
     }
+
+    const postalCode = postal.code;
 
     if (!location) {
       throw new ServiceError({
@@ -55,7 +61,13 @@ export default class GeoIp2LiteService {
       });
     }
 
-    return { ...addressDetails, accuracyRadius, timeZone };
+    return {
+      city: cityName,
+      country: countryName,
+      postal: postalCode,
+      accuracyRadius,
+      timeZone,
+    };
   }
 }
 

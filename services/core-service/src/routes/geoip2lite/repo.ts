@@ -1,17 +1,13 @@
-import { WebServiceClient } from '@maxmind/geoip2-node';
+import { Reader } from '@maxmind/geoip2-node';
+import path from 'path';
 
 export default class GeoIp2LiteRepo {
-  private readonly apiClient: WebServiceClient;
-
-  constructor(
-    private readonly apiKey: string,
-    private readonly apiAccountId: string,
-  ) {
-    this.apiClient = new WebServiceClient(apiAccountId, apiKey);
-  }
-
   async getAddressByIp(ip: string) {
-    const { city, country, postal, location } = await this.apiClient.city(ip);
+    const reader = await Reader.open(
+      path.join(__dirname, '../../assets', 'GeoLite2-City.mmdb'),
+    );
+
+    const { city, country, postal, location } = reader.city(ip);
 
     const addressDetails = {
       city,
