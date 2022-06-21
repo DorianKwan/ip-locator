@@ -5,8 +5,7 @@ import GeoIP2Lite from './routes/geoip2lite';
 import { createServer, createLogger, getLogger, loadConfig } from './utils';
 
 const main = async () => {
-  const { isProduction, port, apiKey, apiAccountId, reactAppUrl } =
-    loadConfig();
+  const { isProduction, port, reactAppUrl } = loadConfig();
 
   const server = new Koa();
   const logger = createLogger({ debug: !isProduction });
@@ -17,7 +16,7 @@ const main = async () => {
 
   const router = new Router({ prefix: '/api' });
 
-  router.use('/geoip2lite', GeoIP2Lite(apiKey, apiAccountId));
+  router.use('/geoip2lite', GeoIP2Lite());
 
   server
     .use(router.routes())
