@@ -17,7 +17,7 @@ export default (geo2LiteService: Geo2LiteService) => {
 
   return addRoutesToRouter(router, [
     route({
-      path: '/address',
+      path: '/find-address',
       method: HttpMethod.GET,
       querySchema: SchemaBuilder.emptySchema().addString('ip', {
         minLength: 7,
