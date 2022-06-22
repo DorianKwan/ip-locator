@@ -7,9 +7,9 @@ export const buildAddress = ({
   accuracyRadius,
   timeZone,
 }: ApiData.AddressDetails) => {
-  const location = `is located within ${city} ${country}, ${postal}`;
-  const accuracy = `with an accuracy radius of ${accuracyRadius}`;
-  const time = `in the timezone of ${timeZone}`;
+  const location = `${city} ${country}, ${postal}`;
+  const accuracy = `Accuracy Radius of ${accuracyRadius}`;
+  const time = `Timezone ${timeZone}`;
   const full = `${city} ${country} ${postal} ${accuracyRadius} ${timeZone}`;
 
   return {
