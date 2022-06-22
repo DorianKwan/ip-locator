@@ -12,7 +12,7 @@ import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faHome, faLocationPin } from '@fortawesome/free-solid-svg-icons';
 import { useTypedTheme } from 'src/hooks';
 import { Home } from '../pages/Home';
-import { Search } from '../pages/Search';
+import { AddressSearch } from '../pages/AddressSearch';
 import AppLogo from '../../assets/images/logo.png';
 
 const routes = [
@@ -25,7 +25,7 @@ const routes = [
   {
     path: '/search',
     main: () => {
-      return <Search />;
+      return <AddressSearch />;
     },
     icon: faLocationPin,
   },

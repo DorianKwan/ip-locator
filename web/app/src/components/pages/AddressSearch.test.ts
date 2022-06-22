@@ -1,4 +1,4 @@
-describe('Search page', () => {
+describe('Address Search page', () => {
   it('stub', () => {});
 });
 

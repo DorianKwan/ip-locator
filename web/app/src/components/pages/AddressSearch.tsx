@@ -17,7 +17,7 @@ const DEFAULT_TIME = '';
 
 export interface SearchProps {}
 
-export const Search: React.VFC<SearchProps> = () => {
+export const AddressSearch: React.VFC<SearchProps> = () => {
   const theme = useTypedTheme();
   const [ipAddress, setIpAddress] = useState<string>(DEFAULT_IP);
   const [streetAddress, setStreetAddress] = useState<string>(DEFAULT_ADDRESS);
