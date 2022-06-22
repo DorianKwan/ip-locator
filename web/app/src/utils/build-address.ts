@@ -10,12 +10,10 @@ export const buildAddress = ({
   const location = `${city} ${country}, ${postal}`;
   const accuracy = `Accuracy Radius of ${accuracyRadius}`;
   const time = `Timezone ${timeZone}`;
-  const full = `${city} ${country} ${postal} ${accuracyRadius} ${timeZone}`;
 
   return {
     location,
     accuracy,
     time,
-    full,
   };
 };

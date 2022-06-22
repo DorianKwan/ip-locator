@@ -37,9 +37,9 @@ export const Search: React.VFC = () => {
           ipAddress,
         );
 
-        const { full, location, accuracy, time } = buildAddress(addressDetails);
+        const { location, accuracy, time } = buildAddress(addressDetails);
 
-        prevAddressRef.current = full;
+        prevAddressRef.current = location;
 
         setStreetAddress(location);
         setAccuracyRadius(accuracy);
