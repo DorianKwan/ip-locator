@@ -893,10 +893,6 @@ export const gradients: UIGradient[] = [
     colors: ['#FFAFBD', '#ffc3a0'],
   },
   {
-    name: 'Honey Dew',
-    colors: ['#43C6AC', '#F8FFAE'],
-  },
-  {
     name: 'Under the Lake',
     colors: ['#093028', '#237A57'],
   },
