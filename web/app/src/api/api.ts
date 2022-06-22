@@ -1,7 +1,9 @@
 import { AxiosResponse } from 'axios';
 import { ApiData } from 'ip-locator-shared';
+import { loadConfig } from 'src/utils/load-config';
 import { createBaseApi } from './base-api';
 
+const { webServerUrl, webServerPort } = loadConfig();
 interface ApiResponse<T> {
   data: T;
   success: boolean;
@@ -32,4 +34,6 @@ const createApi = (baseUrl: string) => {
   };
 };
 
-export const coreServiceApi = createApi('http://localhost:3838');
+export const coreServiceApi = createApi(
+  `http://${webServerUrl}:${webServerPort}`,
+);
