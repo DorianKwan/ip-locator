@@ -4,9 +4,7 @@ export interface Theme {
   readonly gradients: {
     [key: string]: Gradient;
   };
-  readonly colors: {
-    [key: string]: string;
-  };
+  readonly colors: typeof colors;
 }
 
 export interface Gradient {
@@ -52,16 +50,19 @@ const buildThemeGradients = () => {
   return themeGradients;
 };
 
+export const colors = {
+  ash: '#3f4c6b',
+  pink: '#f8cdda',
+  red: '#fe6666',
+  darkRed: '#ff3e3e',
+  green: '#51fa14',
+  darkGreen: '#4fed15',
+  purple: '#8f94fb',
+};
+
 const theme: Theme = {
   gradients: buildThemeGradients(),
-  colors: {
-    ash: '#3f4c6b',
-    pink: '#f8cdda',
-    red: '#FF8C8C',
-    green: 'rgb(81, 250, 20)',
-    darkGreen: 'rgb(78, 234, 54)',
-    purple: '#8f94fb',
-  },
+  colors,
 };
 
 export default theme;

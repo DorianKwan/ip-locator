@@ -1,13 +1,10 @@
 import React from 'react';
-import { Theme } from 'src/theme/theme';
+import { Theme, colors } from 'src/theme';
 import { render, screen } from '../../utils';
 import { Home } from './Home';
 
 const mockTheme: Theme = {
-  colors: {
-    ash: '#3f4c6b',
-    pink: '#f8cdda',
-  },
+  colors,
   // BEWARE: adding more than two gradients will break these tests
   gradients: {
     blu: {
