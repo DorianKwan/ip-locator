@@ -64,7 +64,7 @@ module.exports = {
     {
       files: ['*.js', '*.ts'],
       parserOptions: {
-        project: ['./services/core-service/tsconfig.json'],
+        project: ['./tsconfig.json'],
       },
     },
   ],
