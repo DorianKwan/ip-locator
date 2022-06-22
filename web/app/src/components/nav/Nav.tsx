@@ -10,8 +10,7 @@ import {
 } from 'react-router-dom';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faHome, faLocationPin } from '@fortawesome/free-solid-svg-icons';
-import { useTypedTheme, useGeolocation } from 'src/hooks';
-import { Coordinates } from 'src/utils';
+import { useTypedTheme } from 'src/hooks';
 import { Home } from '../pages/Home';
 import { Search } from '../pages/Search';
 import AppLogo from '../../assets/images/logo.png';
