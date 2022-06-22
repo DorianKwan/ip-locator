@@ -20,13 +20,13 @@ const routes = [
   {
     path: '/',
     exact: true,
-    main: (props: {}) => <Home {...props} />,
+    main: () => <Home />,
     icon: faHome,
   },
   {
     path: '/search',
-    main: (props: { coordinates?: Coordinates }) => {
-      return <Search {...props} />;
+    main: () => {
+      return <Search />;
     },
     icon: faLocationPin,
   },
