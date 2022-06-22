@@ -1,5 +1,4 @@
 {
-  "extends": "../../tsconfig",
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./dist",
@@ -18,9 +17,17 @@
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
     "isolatedModules": true,
-    "noEmit": true
+    "noEmit": true,
+    "declaration": true,
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "preserveConstEnums": true
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules"],
-  "references": [{ "path": "../../lib/shared" }]
+  "references": [{ "path": "../../lib/shared" }],
+  "watchOptions": {
+    "excludeFiles": ["**/*.test.ts", "**.*spec.ts"]
+  }
 }

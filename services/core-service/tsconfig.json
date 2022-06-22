@@ -1,10 +1,26 @@
 {
-  "extends": "../../tsconfig",
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./dist",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "declaration": true,
+    "sourceMap": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "lib": ["esnext"],
+    "target": "es2017",
+    "strict": true,
+    "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "preserveConstEnums": true,
+    "jsx": "preserve",
+    "skipLibCheck": true
   },
   "include": ["src/**/*"],
-  "references": [{ "path": "../../lib/shared" }]
+  "exclude": ["node_modules"],
+  "references": [{ "path": "../../lib/shared" }],
+  "watchOptions": {
+    "excludeFiles": ["**/*.test.ts", "**.*spec.ts"]
+  }
 }

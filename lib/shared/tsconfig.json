@@ -1,9 +1,25 @@
 {
-  "extends": "../../tsconfig",
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./dist",
-    "composite": true
+    "composite": true,
+    "declaration": true,
+    "sourceMap": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "lib": ["esnext"],
+    "target": "es2017",
+    "strict": true,
+    "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "preserveConstEnums": true,
+    "jsx": "preserve",
+    "skipLibCheck": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"],
+  "watchOptions": {
+    "excludeFiles": ["**/*.test.ts", "**.*spec.ts"]
+  }
 }
