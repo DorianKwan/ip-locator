@@ -1,3 +1,2 @@
 export * from './test-utils';
-export * from '../types/coordinates';
-export * from './capitalizeString';
+export * from './capitalize-string';
