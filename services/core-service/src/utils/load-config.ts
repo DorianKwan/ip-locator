@@ -8,7 +8,7 @@ dotenv.config({ path: path.join(__dirname, '../../../..', '.env') });
 export const loadConfig = () => {
   const {
     NODE_ENV,
-    WEB_SERVER_PORT = 9001,
+    REACT_APP_WEB_SERVER_PORT = 9001,
     REACT_APP_URL: reactAppUrl,
   } = process.env;
 
@@ -20,7 +20,7 @@ export const loadConfig = () => {
   }
 
   const isProduction = NODE_ENV === 'production';
-  const port = Number(WEB_SERVER_PORT);
+  const port = Number(REACT_APP_WEB_SERVER_PORT);
 
   return {
     isProduction,
