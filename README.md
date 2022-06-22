@@ -3,7 +3,7 @@
 First ensure you're on node version **v16.15.1**. `.nvmrc` will enforce this version.  
 Recommended node version managers: **[n](https://github.com/tj/n)** or **[nvm](https://github.com/nvm-sh/nvm)**
 
-Grab a MaxMind GeoIP2Lite City DB from [here](https://www.maxmind.com/en/accounts/current/geoip/downloads) and unzip and move the `.mmdb` to the `services/core-service/src/assets`  
+Grab a MaxMind GeoIP2Lite City DB from [here](https://www.maxmind.com/en/accounts/current/geoip/downloads). Unzip it and move the `.mmdb` to the `services/core-service/src/assets`  
 Ensure it's name matches `GeoLite2-City.mmdb`
 
 Copy `.env.example` to a new `.env` file for core-service & to `web/app` (required since create-react-app was never ejected)
