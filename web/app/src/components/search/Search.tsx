@@ -29,7 +29,7 @@ export const Search: React.VFC = () => {
   const prevAddressRef = useRef<string>(DEFAULT_ADDRESS);
 
   useAsyncEffect(async () => {
-    if (ipAddress !== prevAddressRef.current && ipAddress !== DEFAULT_IP) {
+    if (ipAddress !== prevIpRef.current && ipAddress !== DEFAULT_IP) {
       try {
         setIsLoading(true);
 
@@ -40,14 +40,15 @@ export const Search: React.VFC = () => {
         const { location, accuracy, time } = buildAddress(addressDetails);
 
         prevAddressRef.current = location;
+        prevIpRef.current = ipAddress;
 
         setStreetAddress(location);
         setAccuracyRadius(accuracy);
         setTimeZone(time);
         setIsLoading(false);
       } catch (err) {
-        setIpAddress(prevAddressRef.current || DEFAULT_IP);
-        setStreetAddress(prevIpRef.current || DEFAULT_ADDRESS);
+        setIpAddress(prevIpRef.current || DEFAULT_IP);
+        setStreetAddress(prevAddressRef.current || DEFAULT_ADDRESS);
         setIsLoading(false);
 
         // error handling isn't ideal here and could be improved drastically
