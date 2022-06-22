@@ -14,7 +14,6 @@ import { useTypedTheme } from 'src/hooks';
 import { Home } from '../pages/Home';
 import { Search } from '../pages/Search';
 import AppLogo from '../../assets/images/logo.png';
-import { Loader } from '../utility';
 
 const routes = [
   {
@@ -67,27 +66,21 @@ const Sidebar = () => {
 };
 
 export const Nav = () => {
-  const { coordinates, isLoaded } = useGeolocation();
-
   return (
     <Router>
       <Container>
         <Sidebar />
         <PageContainer>
-          {isLoaded ? (
-            <Switch>
-              {routes.map(route => (
-                <Route key={route.path} path={route.path} exact={route.exact}>
-                  {<route.main coordinates={coordinates} />}
-                </Route>
-              ))}
-              <Route path="*">
-                <Redirect to="/home" />
+          <Switch>
+            {routes.map(route => (
+              <Route key={route.path} path={route.path} exact={route.exact}>
+                {<route.main />}
               </Route>
-            </Switch>
-          ) : (
-            <Loader />
-          )}
+            ))}
+            <Route path="*">
+              <Redirect to="/home" />
+            </Route>
+          </Switch>
         </PageContainer>
       </Container>
     </Router>
