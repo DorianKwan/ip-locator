@@ -43,6 +43,15 @@ Finally boot up the React dev server and happy coding! (run in new tab/window/pa
  > yarn web
 ```
 
+### Video Clips
+
+Homepage w/ UI Gradient Clone
+![homepage](https://user-images.githubusercontent.com/26664788/174967517-736cc71d-feab-410e-b1f0-49cf8e9c6348.gif)
+
+Search for Address IP
+![ip-search](https://user-images.githubusercontent.com/26664788/174968690-18bb69f5-15ff-4fc4-b942-b82889aa0ef1.gif)
+
+
 ### Scripts
 
 Run Lint
