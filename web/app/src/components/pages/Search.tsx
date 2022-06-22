@@ -2,55 +2,54 @@ import React, { useState, useRef } from 'react';
 import styled from '@emotion/styled';
 import sweetAlert from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { Coordinates } from '../../utils';
-import { useAsyncEffect, useTypedTheme } from '../../hooks';
+import { buildAddress } from 'src/utils';
+import { coreServiceApi } from 'src/api';
+import { useAsyncEffect, useTypedTheme } from 'src/hooks';
 import { AnimatedText, FadeIn, Loader, PageWrapper } from '../utility';
 
 const ANIMATED_TEXT_DURATION = 0.05;
 const FADE_IN_DELAY = 0.4;
 const FADE_IN_DURATION = 1.75;
-export interface SearchProps {
-  coordinates?: Coordinates;
-}
+const DEFAULT_IP = '0.0.0.0';
+const DEFAULT_ADDRESS = 'Everywhere.. Nowhere..';
+const DEFAULT_ACCURACY = '';
+const DEFAULT_TIME = '';
 
-interface GeoIPData {
-  address: string;
-}
+export interface SearchProps {}
 
 export const Search: React.VFC<SearchProps> = () => {
   const theme = useTypedTheme();
-  const [ipAddress, setIpAddress] = useState<string>('');
-  const [streetAddress, setStreetAddress] = useState<string>('');
+  const [ipAddress, setIpAddress] = useState<string>(DEFAULT_IP);
+  const [streetAddress, setStreetAddress] = useState<string>(DEFAULT_ADDRESS);
+  const [accuracyRadius, setAccuracyRadius] =
+    useState<string>(DEFAULT_ACCURACY);
+  const [timeZone, setTimeZone] = useState<string>(DEFAULT_TIME);
   const [inputVal, setInputVal] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
 
-  const prevAddressRef = useRef<string | undefined>();
+  const prevIpRef = useRef<string>(DEFAULT_IP);
+  const prevAddressRef = useRef<string>(DEFAULT_ADDRESS);
 
   useAsyncEffect(async () => {
-    if (ipAddress !== prevAddressRef.current) {
+    if (ipAddress !== prevAddressRef.current && ipAddress !== DEFAULT_IP) {
       try {
         setIsLoading(true);
 
-        const response = await fetch('');
+        const addressDetails = await coreServiceApi.geoip2.getAddressByIp(
+          ipAddress,
+        );
 
-        if (!response.ok) {
-          if (response.status === 404) {
-            throw new Error(`IP address ${ipAddress} was not found. Typo?`);
-          }
+        const { full, location, accuracy, time } = buildAddress(addressDetails);
 
-          throw new Error('GeoIP2 API Fetch Failed');
-        }
+        prevAddressRef.current = full;
 
-        const locationData = (await response.json()) as GeoIPData;
-
-        const searchedAddress = locationData.address;
-
-        prevAddressRef.current = searchedAddress;
-
-        setStreetAddress(searchedAddress);
+        setStreetAddress(location);
+        setAccuracyRadius(accuracy);
+        setTimeZone(time);
         setIsLoading(false);
       } catch (err) {
-        setStreetAddress(prevAddressRef.current || '');
+        setIpAddress(prevAddressRef.current || DEFAULT_IP);
+        setStreetAddress(prevIpRef.current || DEFAULT_ADDRESS);
         setIsLoading(false);
 
         // error handling isn't ideal here and could be improved drastically
@@ -63,6 +62,8 @@ export const Search: React.VFC<SearchProps> = () => {
           icon: 'error',
         });
       }
+    } else {
+      setIsLoading(false);
     }
   }, [ipAddress]);
 
@@ -70,22 +71,49 @@ export const Search: React.VFC<SearchProps> = () => {
     return <Loader />;
   }
 
+  const onSearch = () => {
+    setIpAddress(inputVal);
+    setInputVal('');
+  };
+
   return (
     <SearchPageWrapper>
       <SearchContainer>
         <SearchHeading>
           <AnimatedText
-            duration={ANIMATED_TEXT_DURATION}
+            duration={ANIMATED_TEXT_DURATION / 2}
             content="Street Address by IP"
           />
         </SearchHeading>
-        <StreetAddress>
+        <IpAddress>
           <AnimatedText
             capitalize
             duration={ANIMATED_TEXT_DURATION}
+            content={ipAddress}
+          />
+        </IpAddress>
+        <AddressInfo>
+          <AnimatedText
+            duration={ANIMATED_TEXT_DURATION}
             content={streetAddress}
           />
-        </StreetAddress>
+        </AddressInfo>
+        {accuracyRadius !== '' && (
+          <AddressInfo>
+            <AnimatedText
+              duration={ANIMATED_TEXT_DURATION}
+              content={accuracyRadius}
+            />
+          </AddressInfo>
+        )}
+        {timeZone !== '' && (
+          <AddressInfo>
+            <AnimatedText
+              duration={ANIMATED_TEXT_DURATION}
+              content={timeZone}
+            />
+          </AddressInfo>
+        )}
         <FadeIn delay={FADE_IN_DELAY} duration={FADE_IN_DURATION}>
           <InputWrapper>
             <IpInput
@@ -93,23 +121,30 @@ export const Search: React.VFC<SearchProps> = () => {
               onChange={event => setInputVal(event.currentTarget.value)}
               onKeyPress={event => {
                 if (event.key === 'Enter') {
-                  setIpAddress(inputVal);
-                  setInputVal('');
+                  onSearch();
                 }
               }}
               focusedBorderColor={theme.colors.purple}
               value={inputVal}
             />
-            <ClearWrapper>
-              <ClearButton
+            <ButtonWrapper>
+              <ActionButton
+                type="button"
+                aria-label="search for address by IP address"
+                onClick={() => onSearch()}
+                bgColor={theme.colors.green}
+                hoverColor={theme.colors.darkGreen}>
+                Search
+              </ActionButton>
+              <ActionButton
                 type="button"
                 aria-label="clear IP input"
                 onClick={() => setInputVal('')}
-                bgColor={theme.colors.green}
-                hoverColor={theme.colors.darkGreen}>
+                bgColor={theme.colors.red}
+                hoverColor={theme.colors.darkRed}>
                 Clear
-              </ClearButton>
-            </ClearWrapper>
+              </ActionButton>
+            </ButtonWrapper>
           </InputWrapper>
         </FadeIn>
       </SearchContainer>
@@ -129,21 +164,39 @@ const SearchContainer = styled.div``;
 const SearchHeading = styled.h1`
   font-size: 3rem;
   line-height: 1;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
 
   @media only screen and (min-width: 1200px) {
     font-size: 4.5rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 2.25rem;
   }
 `;
 
-const StreetAddress = styled.h2`
-  font-size: 2rem;
-  margin-bottom: 0.75rem;
+const IpAddress = styled.h2`
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
 
   @media only screen and (min-width: 1200px) {
-    font-size: 3.25em;
-    margin-bottom: 1rem;
+    font-size: 3.75em;
+    margin-bottom: 1.5rem;
+  }
+`;
+
+const AddressInfo = styled.p`
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+
+  :last-of-type {
+    margin-bottom: 2.25rem;
+  }
+
+  @media only screen and (min-width: 1200px) {
+    font-size: 2.25rem;
+    margin-bottom: 0.5rem;
+
+    :last-of-type {
+      margin-bottom: 3.25rem;
+    }
   }
 `;
 
@@ -153,35 +206,46 @@ const InputWrapper = styled.div`
   grid-template-rows: 1fr;
   gap: 0.75rem;
   width: 100%;
-  max-width: 25rem;
+  max-width: 40rem;
   margin: 0 auto;
 `;
 
-const ClearWrapper = styled.div`
+const ButtonWrapper = styled.div`
+  display: flex;
   padding-bottom: 1rem;
   width: 100%;
+
+  & > button:not(:last-of-type) {
+    margin-right: 0.5rem;
+  }
 `;
 
-const ClearButton = styled.button<{ bgColor: string; hoverColor: string }>`
+const ActionButton = styled.button<{
+  bgColor: string;
+  hoverColor: string;
+}>`
   border: none;
   color: white;
   background: ${props => props.bgColor};
   font-weight: bold;
-  padding: 0.45rem 1rem;
+  font-size: 1.125rem;
+  padding: 0.5rem 1rem;
   transition: background 0.25s ease-in-out;
   border-radius: 0.75rem;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background: ${props => props.hoverColor};
+    cursor: pointer;
   }
 
   @media only screen and (min-width: 1200px) {
     font-size: 1.6rem;
-    padding: 0.5rem 1rem;
   }
 `;
 
 const IpInput = styled.input<{ focusedBorderColor: string }>`
+  font-size: 1.125rem;
   padding: 0.5rem 0.75rem;
   border-radius: 0.75rem;
   border-style: none;
