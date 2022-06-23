@@ -9,7 +9,7 @@
     "start:watch": "node-dev ./dist/index.js",
     "build": "tsc -b",
     "build:watch": "yarn build --watch",
-    "build:clean": "yarn clead && yarn build",
+    "build:clean": "yarn clean && yarn build",
     "clean": "rm -rf dist tsconfig.tsbuildinfo",
     "lint": "eslint --ext .ts src",
     "test": "jest --passWithNoTests --testTimeout 150",
