@@ -7,7 +7,7 @@ import {
   SchemaBuilder,
   err,
 } from '@lcdev/router';
-import { ipRegex } from '../../utils';
+import { ipRegex } from 'ip-locator-shared/';
 import GeoIp2LiteService, { GeoIp2LiteServiceError } from './service';
 
 export default (geoIp2LiteService: GeoIp2LiteService) => {
