@@ -51,7 +51,7 @@ export const Search: React.VFC = () => {
         setStreetAddress(prevAddressRef.current || DEFAULT_ADDRESS);
         setIsLoading(false);
 
-        // error handling isn't ideal here and could be improved drastically
+        // error handling isn't ideal here and could be improved
         const errorMessage =
           err instanceof Error ? err.message : 'Please check your connection';
 
