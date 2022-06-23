@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import styled from '@emotion/styled';
 import sweetAlert from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import { ipRegex } from 'ip-locator-shared/';
 import { buildAddress } from 'src/utils';
 import { coreServiceApi } from 'src/api';
 import { useAsyncEffect, useTypedTheme } from 'src/hooks';
@@ -23,6 +24,7 @@ export const Search: React.VFC = () => {
     useState<string>(DEFAULT_ACCURACY);
   const [timeZone, setTimeZone] = useState<string>(DEFAULT_TIME);
   const [inputVal, setInputVal] = useState<string>('');
+  const [inputError, setInputError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
 
   const prevIpRef = useRef<string>(DEFAULT_IP);
@@ -71,8 +73,14 @@ export const Search: React.VFC = () => {
   }
 
   const onSearch = () => {
-    setIpAddress(inputVal);
-    setInputVal('');
+    if (ipRegex.exec(inputVal) && inputVal.length === 7) {
+      setInputError(false);
+      setIpAddress(inputVal);
+      setInputVal('');
+      return;
+    }
+
+    setInputError(true);
   };
 
   return (
@@ -113,7 +121,9 @@ export const Search: React.VFC = () => {
                 onSearch();
               }
             }}
-            focusedBorderColor={theme.colors.purple}
+            focusedBorderColor={
+              inputError ? theme.colors.darkRed : theme.colors.purple
+            }
             value={inputVal}
           />
           <ButtonWrapper>
